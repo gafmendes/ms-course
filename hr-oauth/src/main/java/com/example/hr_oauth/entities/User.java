@@ -93,12 +93,6 @@ public class User implements  UserDetails, Serializable{
 	}
 
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return roles.stream().map(x -> new SimpleGrantedAuthority(x.getRoleName()))
-				.collect(Collectors.toList());
-	}
-
-	@Override
 	public String getUsername() {
 		return email;
 	}
@@ -121,5 +115,11 @@ public class User implements  UserDetails, Serializable{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return roles.stream().map(x -> new SimpleGrantedAuthority(x.getRoleName()))
+				.collect(Collectors.toList());
 	}
 }
